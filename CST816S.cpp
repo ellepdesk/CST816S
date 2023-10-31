@@ -45,7 +45,21 @@ CST816S::CST816S(int sda, int scl, int rst, int irq) {
   _scl = scl;
   _rst = rst;
   _irq = irq;
+  _swap_xy = false;
+  _invert_x = false;
+  _invert_y = false;
+}
 
+void CST816S::set_swap_xy(bool value){
+  _swap_xy = value;
+}
+
+void CST816S::set_invert_x(bool value){
+  _invert_x = value;
+}
+
+void CST816S::set_invert_y(bool value){
+  _invert_y = value;
 }
 
 /*!
@@ -58,8 +72,22 @@ void CST816S::read_touch() {
   data.gestureID = data_raw[0];
   data.points = data_raw[1];
   data.event = data_raw[2] >> 6;
-  data.x = ((data_raw[2] & 0xF) << 8) + data_raw[3];
-  data.y = ((data_raw[4] & 0xF) << 8) + data_raw[5];
+  int x = ((data_raw[2] & 0xF) << 8) + data_raw[3];
+  int y = ((data_raw[4] & 0xF) << 8) + data_raw[5];
+  if (_invert_x){
+    x = 0x0FFF - x;
+  }
+  if (_invert_y){
+    y = 0x0FFF - y:
+  }
+  if (_swap_xy) {
+    data.x = y;
+    data.y = x;
+  }
+  else {
+    data.x = x;
+    data.y = y;
+  }
 }
 
 /*!

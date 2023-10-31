@@ -63,6 +63,9 @@ class CST816S {
     data_struct data;
     String gesture();
 
+    void set_swap_xy(bool);
+    void set_invert_x(bool);
+    void set_invert_y(bool);
 
   private:
     int _sda;
@@ -70,6 +73,10 @@ class CST816S {
     int _rst;
     int _irq;
     bool _event_available;
+
+    bool _swap_xy;
+    bool _invert_x;
+    bool _invert_y;
 
     void IRAM_ATTR handleISR();
     void read_touch();
