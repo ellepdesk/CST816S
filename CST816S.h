@@ -63,7 +63,7 @@ class CST816S {
     data_struct data;
     String gesture();
 
-    void set_swap_xy(bool);
+    void set_swap_x_y(bool);
     void set_invert_x(bool);
     void set_invert_y(bool);
 
@@ -74,7 +74,7 @@ class CST816S {
     int _irq;
     bool _event_available;
 
-    bool _swap_xy;
+    bool _swap_x_y;
     bool _invert_x;
     bool _invert_y;
 

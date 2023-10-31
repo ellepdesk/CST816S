@@ -45,13 +45,13 @@ CST816S::CST816S(int sda, int scl, int rst, int irq) {
   _scl = scl;
   _rst = rst;
   _irq = irq;
-  _swap_xy = false;
+  _swap_x_y = false;
   _invert_x = false;
   _invert_y = false;
 }
 
-void CST816S::set_swap_xy(bool value){
-  _swap_xy = value;
+void CST816S::set_swap_x_y(bool value){
+  _swap_x_y = value;
 }
 
 void CST816S::set_invert_x(bool value){
@@ -80,7 +80,7 @@ void CST816S::read_touch() {
   if (_invert_y){
     y = 0x0FFF - y:
   }
-  if (_swap_xy) {
+  if (_swap_x_y) {
     data.x = y;
     data.y = x;
   }
