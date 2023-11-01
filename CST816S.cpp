@@ -78,7 +78,7 @@ void CST816S::read_touch() {
     x = 0x0FFF - x;
   }
   if (_invert_y){
-    y = 0x0FFF - y:
+    y = 0x0FFF - y;
   }
   if (_swap_x_y) {
     data.x = y;
