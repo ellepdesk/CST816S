@@ -147,11 +147,48 @@ void CST816S::sleep() {
   i2c_write(CST816S_ADDRESS, 0xA5, &standby_value, 1);
 }
 
+
+/*!
+    @brief  apply translations to build-in gestures
+*/
+GESTURE CST816S::apply_gesture_translation(GESTURE gesture){
+  // Apply axis inversions
+  switch(gesture){
+    case SWIPE_DOWN:
+      gesture = _invert_y ? SWIPE_UP : gesture;
+      break;
+    case SWIPE_UP:
+      gesture = _invert_y ? SWIPE_DOWN : gesture;
+      break;
+    case SWIPE_LEFT:
+      gesture = _invert_x ? SWIPE_RIGHT: gesture;
+    case SWIPE_RIGHT:
+      gesture = _invert_x ? SWIPE_LEFT: gesture;
+  }
+  // Apply x-y swapping
+  switch(gesture){
+    case SWIPE_DOWN:
+      gesture = _swap_x_y ? SWIPE_LEFT : gesture;
+      break;
+    case SWIPE_UP:
+      gesture = _swap_x_y ? SWIPE_RIGHT : gesture;
+      break;
+    case SWIPE_LEFT:
+      gesture = _swap_x_y ? SWIPE_DOWN: gesture;
+    case SWIPE_RIGHT:
+      gesture = _swap_x_y ? SWIPE_RIGHT: gesture;
+  }
+
+  return gesture;
+}
+
 /*!
     @brief  get the gesture event name
 */
 String CST816S::gesture() {
-  switch (data.gestureID) {
+  auto gesture = apply_gesture_translation(data.gestureID)
+
+  switch (gesture) {
     case NONE:
       return "NONE";
       break;
