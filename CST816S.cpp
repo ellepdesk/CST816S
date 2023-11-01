@@ -162,8 +162,10 @@ GESTURE CST816S::apply_gesture_translation(GESTURE gesture){
       break;
     case SWIPE_LEFT:
       gesture = _invert_x ? SWIPE_RIGHT: gesture;
+      break;
     case SWIPE_RIGHT:
       gesture = _invert_x ? SWIPE_LEFT: gesture;
+      break;
   }
   // Apply x-y swapping
   switch(gesture){
@@ -175,8 +177,10 @@ GESTURE CST816S::apply_gesture_translation(GESTURE gesture){
       break;
     case SWIPE_LEFT:
       gesture = _swap_x_y ? SWIPE_DOWN: gesture;
+      break;
     case SWIPE_RIGHT:
       gesture = _swap_x_y ? SWIPE_RIGHT: gesture;
+      break;
   }
 
   return gesture;
