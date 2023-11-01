@@ -186,7 +186,7 @@ GESTURE CST816S::apply_gesture_translation(GESTURE gesture){
     @brief  get the gesture event name
 */
 String CST816S::gesture() {
-  auto gesture = apply_gesture_translation(data.gestureID)
+  GESTURE gesture = apply_gesture_translation(GESTURE(data.gestureID));
 
   switch (gesture) {
     case NONE:
